@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070b14">
+    <title>Shadow Nexus Social AI | Shadow Nexus</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="workspace">
+
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-symbol">◈</div>
+                <div>
+                    <h1> Shadow Nexus Social AI </h1>
+                    <span>ARTIFICIAL INTELLIGENCE</span>
+                </div>
+                <button class="mobile-close" id="closeSidebar" aria-label="Close menu">×</button>
+            </div>
+
+            <button class="new-chat" id="newChat">
+                <span>＋</span> New Conversation
+            </button>
+
+            <div class="sidebar-section">
+                <div class="section-heading">WORKSPACE</div>
+                <button class="nav-item active" data-view="chat">
+                    <span>◈</span> Conversations
+                </button>
+                <button class="nav-item" data-view="memory">
+                    <span>⌘</span> Shadow Memory
+                </button>
+                <button class="nav-item" data-view="voice">
+                    <span>♫</span> Voice Center
+                </button>
+            </div>
+
+            <div class="history-section">
+                <div class="section-heading">RECENT CONVERSATIONS</div>
+                <div id="conversationHistory">
+                    <div class="history-empty">Your conversations will appear here.</div>
+                </div>
+            </div>
+
+            <div class="sidebar-bottom">
+                <div class="user-card">
+                    <div class="user-icon">S</div>
+                    <div>
+                        <strong>Shadow Nexus Social AI </strong>
+                        <span>Personal AI Assistant</span>
+                    </div>
+                    <button class="settings-button" id="settingsButton" aria-label="Settings">⚙</button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-panel">
+
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="menu-button" id="openSidebar" aria-label="Open menu">☰</button>
+                    <div>
+                        <div class="topbar-title">Shadow Nexus Social AI </div>
+                        <div class="topbar-subtitle">YOUR PERSONAL INTELLIGENCE SYSTEM</div>
+                    </div>
+                </div>
+
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    <span id="systemStatus">SYSTEM READY</span>
+                </div>
+            </header>
+
+            <section class="conversation" id="conversation">
+
+                <div class="welcome-screen" id="welcomeScreen">
+                    <div class="welcome-symbol">◈</div>
+                    <div class="welcome-eyebrow">WELCOME TO Shadow Nexus Social AI </div>
+                    <h2>I'm <span>Shadow.</span></h2>
+                    <p>Your AI. Your companion. Your intelligence system.</p>
+                    <p class="welcome-description">
+                        I'm here to help you think, create, build, research
+                        and take on whatever comes next.
+                    </p>
+
+                    <div class="suggestion-grid">
+                        <button class="suggestion" data-prompt="Help me work on my current project.">
+                            <span>⌘</span>
+                            <strong>Build something</strong>
+                            <small>Work on a project or idea</small>
+                        </button>
+                        <button class="suggestion" data-prompt="Let's brainstorm some new ideas.">
+                            <span>✧</span>
+                            <strong>Brainstorm ideas</strong>
+                            <small>Explore something new</small>
+                        </button>
+                        <button class="suggestion" data-prompt="Help me research a topic.">
+                            <span>⌕</span>
+                            <strong>Research</strong>
+                            <small>Explore and understand</small>
+                        </button>
+                        <button class="suggestion" data-prompt="Let's have a conversation.">
+                            <span>♫</span>
+                            <strong>Let's talk</strong>
+                            <small>Start a conversation</small>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="messages" id="messages" aria-live="polite"></div>
+
+            </section>
+
+            <section class="assistant-activity">
+                <div class="activity-header">
+                    <div class="activity-identity">
+                        <span class="activity-icon">◈</span>
+                        <div>
+                            <strong>SHADOW</strong>
+                            <span id="activityStatus">STANDING BY</span>
+                        </div>
+                    </div>
+                    <span class="activity-label">VOICE ACTIVITY</span>
+                </div>
+
+                <div class="voice-visualizer idle" id="voiceVisualizer" aria-label="Shadow voice activity visualization">
+                    <div class="voice-bars">
+                        <i></i><i></i><i></i><i></i><i></i>
+                        <i></i><i></i><i></i><i></i><i></i>
+                        <i></i><i></i><i></i><i></i><i></i>
+                        <i></i><i></i><i></i><i></i><i></i>
+                        <i></i><i></i><i></i><i></i><i></i>
+                        <i></i><i></i><i></i><i></i><i></i>
+                        <i></i><i></i><i></i><i></i><i></i>
+                    </div>
+                </div>
+                <div class="activity-caption" id="activityCaption">
+                    SHADOW IS READY
+                </div>
+            </section>
+
+            <section class="composer-area">
+                <form class="composer" id="chatForm">
+                    <textarea
+                        id="messageInput"
+                        rows="1"
+                        placeholder="Message Shadow..."
+                        aria-label="Message Shadow"
+                    ></textarea>
+
+                    <div class="composer-actions">
+                        <div class="composer-tools">
+                            <button type="button" class="tool-button" id="micButton" aria-label="Voice input" title="Voice input">♫</button>
+                            <span class="composer-hint">Shadow is ready when you are.</span>
+                        </div>
+                        <button type="submit" class="send-button" id="sendButton" aria-label="Send message">
+                            <span>➤</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="composer-disclaimer">
+                    Shadow Nexus Social AI  <span>•</span> STAY LEGENDARY
+                </div>
+            </section>
+
+        </main>
+    </div>
+    <script src="js/app.js" defer></script>
+</body>
+</html>
+
