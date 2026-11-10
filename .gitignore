@@ -1,0 +1,22 @@
+﻿# Private credentials
+.env
+.env.*
+!.env.example
+
+# Python files and environments
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Databases and runtime data
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Local editor files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
