@@ -3,6 +3,19 @@
 
     const $ = (selector) => document.querySelector(selector);
 
+    const API_BASE = "https://shadow-reaper-worker.nthntjrn.workers.dev";
+    let sessionToken = localStorage.getItem("shadow_session_token") || "";
+
+    async function apiFetch(path, options = {}) {
+        const headers = new Headers(options.headers || {});
+        if (sessionToken) headers.set("Authorization", "Bearer " + sessionToken);
+        return fetch(API_BASE + path, {
+            ...options,
+            headers,
+            credentials: "omit"
+        });
+    }
+
     const sidebar = $("#sidebar");
     const chatForm = $("#chatForm");
     const messageInput = $("#messageInput");
@@ -21,16 +34,17 @@
         try {
             setStatus("CONNECTING", "SETTING UP YOUR SHADOW SESSION");
 
-            const session = await fetch("/api/device/session", {
-                method: "POST",
-                credentials: "same-origin"
+            const session = await apiFetch("/api/device/session", {
+                method: "POST"
             });
 
             if (!session.ok) throw new Error("Could not create device session.");
+            const sessionData = await session.json();
+            if (!sessionData.session_token) throw new Error("Worker did not return a session token.");
+            sessionToken = sessionData.session_token;
+            localStorage.setItem("shadow_session_token", sessionToken);
 
-            const result = await fetch("/api/profiles", {
-                credentials: "same-origin"
-            });
+            const result = await apiFetch("/api/profiles");
 
             if (!result.ok) throw new Error("Could not load profiles.");
 
@@ -47,7 +61,7 @@
                     return;
                 }
 
-                const created = await fetch("/api/profiles", {
+                const created = await apiFetch("/api/profiles", {
                     method: "POST",
                     credentials: "same-origin",
                     headers: { "Content-Type": "application/json" },
@@ -179,7 +193,7 @@
         setStatus("THINKING", "SHADOW IS PROCESSING YOUR MESSAGE");
 
         try {
-            const response = await fetch("/api/chat", {
+            const response = await apiFetch("/api/chat", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -310,7 +324,7 @@
         }
 
         try {
-            const response = await fetch("/api/profiles/" + selectedProfile.id, {
+            const response = await apiFetch("/api/profiles/" + selectedProfile.id, {
                 method: "PATCH",
                 credentials: "same-origin",
                 headers: { "Content-Type": "application/json" },
